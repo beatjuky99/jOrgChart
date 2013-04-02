@@ -99,7 +99,8 @@
     chartElement : 'body',
     depth      : -1,
     chartClass : "jOrgChart",
-    dragAndDrop: false
+    dragAndDrop: false,
+    collapsible: true
   };
   
   var nodeCount = 0;
@@ -133,7 +134,7 @@
                                      .append($nodeContent);
 
     // Expand and contract nodes
-    if ($childNodes.length > 0) {
+    if ($childNodes.length > 0 && opts.collapsible) {
       $nodeDiv.click(function() {
           var $this = $(this);
           var $tr = $this.closest("tr");
@@ -154,6 +155,9 @@
             $node.addClass('collapsed');
           }
         });
+    }
+    if(!opts.collapsible){
+      $nodeDiv.css('cursor','default');
     }
     
     $nodeCell.append($nodeDiv);
